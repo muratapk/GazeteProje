@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Create</h1>
+<form method="post" asp-action="Create">
+    <div class="mb-3">
+        <label class="form-label">Manşet</label>
+        <input type="text" name="Header1" value="" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Alt Başlık</label>
+        <input type="text" name="Header2" value="" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">İçerik</label>
+        <input type="text" name="Content" value="" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Oluşturulan Tarih</label>
+        <input type="datetime" name="CreateDate" value="" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Güncelleme Tarihi</label>
+        <input type="datetime" name="UpdateDate" value="" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Resim</label>
+        <input type="text" name="NewsImage" value="" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Kategoriler</label>
+        <input type="text" name="CategoryId" value="" class="form-control" />
+    </div>
+   <input type="submit" class="btn btn-primary" value="Kaydet" />
+
+</form>
+

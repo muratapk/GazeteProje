@@ -10,5 +10,6 @@ namespace GazeteProje.Data
         }
         public DbSet<Category>? Categories { get; set; }
         public DbSet<Admin>? Admins { get; set; }
+        public DbSet<News>? News { get; set; }
     }
 }

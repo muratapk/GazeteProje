@@ -1,0 +1,38 @@
+﻿@model List<GazeteProje.Models.News>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<a asp-action="Create" asp-controller="News" class="btn btn-primary">Yeni</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Header1</th>
+            <th scope="col">Header2</th>
+            <th scope="col">Content</th>
+            <th scope="col">NewsImage</th>
+            <th scope="col">Düzelt</th>
+            <th scope="col">Silme</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <th scope="row">1</th>
+                <td>@item.Header1</td>
+                <td>@item.Header2</td>
+                <td>@item.Content</td>
+                <td>@item.NewsImage</td>
+                <td><a asp-action="Edit" asp-controller="News" asp-route-Id="@item.NewsId" class="btn btn-success">Düzelt</a></td>
+                <td><a asp-action="Delete" asp-controller="News" asp-route-Id="@item.NewsId" class="btn btn-danger">Silme</a></td>
+            </tr>
+        }
+       
+       
+       
+    </tbody>
+</table>
