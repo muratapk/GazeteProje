@@ -5,7 +5,7 @@
 }
 
 <h1>Create</h1>
-<form method="post" asp-action="Create">
+<form method="post" asp-action="Create" enctype="multipart/form-data">
     <div class="mb-3">
         <label class="form-label">Manşet</label>
         <input type="text" name="Header1" value="" class="form-control" />
@@ -28,7 +28,8 @@
     </div>
     <div class="mb-3">
         <label class="form-label">Resim</label>
-        <input type="text" name="NewsImage" value="" class="form-control" />
+        <input type="file" name="ImageUpload" class="form-control"/>
+        
     </div>
     <div class="mb-3">
         <label class="form-label">Kategoriler</label>

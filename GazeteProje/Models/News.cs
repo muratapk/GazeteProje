@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GazeteProje.Models
 {
@@ -15,5 +16,7 @@ namespace GazeteProje.Models
         public int CategoryId { get; set; }
         public virtual Category? Category { get; set; }
         //bir tane kategori ekleyebilirsin
+        [NotMapped]
+        public IFormFile? ImageUpload { get; set; }
     }
 }

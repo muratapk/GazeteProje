@@ -39,12 +39,45 @@ namespace GazeteProje.Controllers
         }
 
         // POST: NewsController/Create
+        //YENİ KAYIT EKLEME ACTION 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(News gelen)
+        public ActionResult Create(News gelen,IFormFile ImageUpload)
         {
             try
             {
+                if(ImageUpload == null)
+                {
+                    TempData["Error"] = "Resim Dosyası Boş";
+                    return View();
+                }
+                else
+                {
+                    var uzanti = Path.GetExtension(ImageUpload.FileName);
+                    var allowExtensions = new[] { ".jpg", ".gif", ".png", ".jpeg" };
+                    //dizi oluşturduk
+                    if(!allowExtensions.Contains(uzanti))
+                    {
+                        TempData["Error"] = "Dosya Tipi Hatalı";
+                        return View();
+                    }
+                    if(ImageUpload.Length> 5242880)
+                    {
+                        TempData["Error"] = "Dosya Boyutu 5Mb Büyük Olamaz";
+                        return View();
+                    }
+                    
+                    //gonderilen dosyanın uzantısını al pdf png gif vb..
+                    var newName = Guid.NewGuid().ToString() + uzanti;
+                    //dosyaya yeniden isim verdik
+                    string yol=Path.Combine(Directory.GetCurrentDirectory()+"/wwwroot/New_Image/",newName);
+                    //dosya kayıt yerini ayarlıyoruz
+                    using(var stream=new FileStream(yol, FileMode.Create)) 
+                    { 
+                     ImageUpload.CopyToAsync(stream);
+                    }
+                    gelen.NewsImage = newName;
+                }
                 _context.News.Add(gelen);
                 _context.SaveChanges();
                 TempData["Success"] = "Success";
@@ -67,10 +100,47 @@ namespace GazeteProje.Controllers
         // POST: NewsController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(News gelen)
+        public ActionResult Edit(News gelen,IFormFile ImageUpload)
         {
             try
             {
+                if (ImageUpload == null)
+                {
+                    TempData["Error"] = "Resim Dosyası Boş";
+                    return View();
+                }
+                else
+                {
+                    var uzanti = Path.GetExtension(ImageUpload.FileName);
+                    var allowExtensions = new[] { ".jpg", ".gif", ".png", ".jpeg" };
+                    //dizi oluşturduk
+                    if (!allowExtensions.Contains(uzanti))
+                    {
+                        TempData["Error"] = "Dosya Tipi Hatalı";
+                        return View();
+                    }
+                    if (ImageUpload.Length > 5242880)
+                    {
+                        TempData["Error"] = "Dosya Boyutu 5Mb Büyük Olamaz";
+                        return View();
+                    }
+
+                    //gonderilen dosyanın uzantısını al pdf png gif vb..
+                    var newName = Guid.NewGuid().ToString() + uzanti;
+                    //dosyaya yeniden isim verdik
+                    string yol = Path.Combine(Directory.GetCurrentDirectory() + "/wwwroot/New_Image/", newName);
+                    //dosya kayıt yerini ayarlıyoruz
+                    using (var stream = new FileStream(yol, FileMode.Create))
+                    {
+                        ImageUpload.CopyToAsync(stream);
+                    }
+                    gelen.NewsImage = newName;
+                }
+
+
+
+
+
                 _context.News.Update(gelen);
                 _context.SaveChanges();
                 TempData["Success"] = "Success";
