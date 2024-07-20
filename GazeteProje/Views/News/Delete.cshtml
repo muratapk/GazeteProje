@@ -1,0 +1,16 @@
+﻿@model GazeteProje.Models.News
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="alert alert-danger" role="alert">
+    Bu Kaydı Silmek İstiyor musunuz?
+</div>
+<h2>Haberin Adı:@Model.Header1</h2>
+<p>@Model.Content</p>
+<form asp-action="Delete">
+    <input type="hidden" name="NewsId" value="@Model.NewsId"/>
+    <input type="submit" value="Sil" class="btn btn-danger" />
+</form>
+

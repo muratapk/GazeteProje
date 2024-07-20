@@ -2,6 +2,7 @@
 using GazeteProje.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GazeteProje.Controllers
 {
@@ -35,6 +36,7 @@ namespace GazeteProje.Controllers
         // GET: NewsController/Create
         public ActionResult Create()
         {
+            ViewBag.CategoryList=new SelectList(_context.Categories,"CategoryId","CategoryName");
             return View();
         }
 
@@ -94,6 +96,7 @@ namespace GazeteProje.Controllers
         public ActionResult Edit(int id)
         {
             var sorgu = _context.News.Find(id);
+            ViewBag.CategoryList = new SelectList(_context.Categories, "CategoryId", "CategoryName");
             return View(sorgu);
         }
 
@@ -156,7 +159,8 @@ namespace GazeteProje.Controllers
         // GET: NewsController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var sorgu = _context.News.Find(id);
+            return View(sorgu);
         }
 
         // POST: NewsController/Delete/5
@@ -166,6 +170,20 @@ namespace GazeteProje.Controllers
         {
             try
             {
+                
+
+
+
+                var sorgu = _context.News.Find(id);
+                string yol = Path.Combine(Directory.GetCurrentDirectory() + "/wwwroot/New_Image/", sorgu.NewsImage);
+                if(System.IO.File.Exists(yol))
+                {
+                    System.IO.File.Delete(yol);
+                }
+                _context.News.Remove(sorgu);
+                _context.SaveChanges();
+                TempData["Success"] = "İşlem Başarılı";
+
                 return RedirectToAction(nameof(Index));
             }
             catch
