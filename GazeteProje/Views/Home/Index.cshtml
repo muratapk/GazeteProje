@@ -3,3 +3,13 @@
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
 }
 
+<!-- Top News Start-->
+<div class="top-news">
+    <div class="container">
+        <div class="row">
+          @await Component.InvokeAsync("SliderList")
+          @await Component.InvokeAsync("SliderRight")
+        </div>
+    </div>
+</div>
+<!-- Top News End-->

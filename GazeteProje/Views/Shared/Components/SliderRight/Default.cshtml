@@ -1,0 +1,22 @@
+﻿@model List<GazeteProje.Models.News>
+<div class="col-md-6 tn-right">
+    <div class="row">
+      @foreach(var item in Model)
+        {
+            <div class="col-md-6">
+                <div class="tn-img">
+                    <img src="/New_Image/@item.NewsImage" />
+                    <div class="tn-title">
+                        <a href="">@item.Header1</a>
+                    </div>
+                </div>
+            </div>
+            
+        }
+       
+
+        
+       
+       
+    </div>
+</div>

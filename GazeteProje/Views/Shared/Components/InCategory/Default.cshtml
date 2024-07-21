@@ -1,0 +1,23 @@
+﻿@model List<GazeteProje.Models.News>
+
+<div class="sidebar-widget">
+    <h2 class="sw-title">Benzer Haberler</h2>
+    <div class="news-list">
+        @foreach(var item in Model)
+        {
+            <div class="nl-item">
+                <div class="nl-img">
+                    <img src="/New_Image/@item.NewsImage" />
+                </div>
+                <div class="nl-title">
+                    <a href="">@item.Header1</a>
+                </div>
+            </div>
+        }
+       
+       
+        
+       
+        
+    </div>
+</div>

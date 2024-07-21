@@ -53,14 +53,14 @@
                 <div class="col-lg-3 col-md-4">
                     <div class="b-logo">
                         <a href="index.html">
-                            <img src="img/logo.png" alt="Logo">
+                            <img src="~/Home/img/logo.png" alt="Logo">
                         </a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-4">
                     <div class="b-ads">
                         <a href="https://htmlcodex.com">
-                            <img src="img/ads-1.jpg" alt="Ads">
+                            <img src="~/Home/img/ads-1.jpg" alt="Ads">
                         </a>
                     </div>
                 </div>
@@ -85,16 +85,11 @@
 
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto">
-                        <a href="index.html" class="nav-item nav-link">Home</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dropdown</a>
-                            <div class="dropdown-menu">
-                                <a href="#" class="dropdown-item">Sub Item 1</a>
-                                <a href="#" class="dropdown-item">Sub Item 2</a>
-                            </div>
-                        </div>
-                        <a href="single-page.html" class="nav-item nav-link">Single Page</a>
-                        <a href="contact.html" class="nav-item nav-link active">Contact Us</a>
+                        <a asp-action="Index" asp-controller="Home" class="nav-item nav-link">Anasayfa</a>
+                      
+                       @await Component.InvokeAsync("CategoryMenu")
+
+                       
                     </div>
                     <div class="social ml-auto">
                         <a href=""><i class="fab fa-twitter"></i></a>

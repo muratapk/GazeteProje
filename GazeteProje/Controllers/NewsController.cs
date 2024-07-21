@@ -30,7 +30,14 @@ namespace GazeteProje.Controllers
         // GET: NewsController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var result=_context.News.Find(id);
+            return View(result);
+        }
+        public ActionResult CategoryList(int id)
+        {
+            var result=_context.News.Where(p=>p.CategoryId== id).ToList(); 
+            //liste olarak gönderdim
+            return View(result);
         }
 
         // GET: NewsController/Create
@@ -162,7 +169,7 @@ namespace GazeteProje.Controllers
             var sorgu = _context.News.Find(id);
             return View(sorgu);
         }
-
+      
         // POST: NewsController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]

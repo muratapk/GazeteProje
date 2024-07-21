@@ -1,0 +1,5 @@
+﻿@model List<GazeteProje.Models.Category>
+@foreach(var item in Model)
+{
+    <a asp-action="CategoryList" asp-controller="News" asp-route-id="@item.CategoryId" class="nav-item nav-link">@item.CategoryName</a>
+}
