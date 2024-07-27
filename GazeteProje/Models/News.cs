@@ -16,6 +16,7 @@ namespace GazeteProje.Models
         public int CategoryId { get; set; }
         public virtual Category? Category { get; set; }
         //bir tane kategori ekleyebilirsin
+        public virtual List<CommentAndNews>? CommentAndNews { get; set; }
         [NotMapped]
         public IFormFile? ImageUpload { get; set; }
     }

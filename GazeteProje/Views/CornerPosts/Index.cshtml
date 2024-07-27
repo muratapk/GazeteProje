@@ -1,0 +1,66 @@
+﻿@model IEnumerable<GazeteProje.Models.CornerPost>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Header)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Content)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedCorner)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatedCorner)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Writer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.read)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Header)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedCorner)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedCorner)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Writer.WriterId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.read)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.CornerPostId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.CornerPostId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.CornerPostId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

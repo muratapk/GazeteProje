@@ -13,5 +13,6 @@ namespace GazeteProje.Data
         public DbSet<News>? News { get; set; }
         public DbSet<Writer>? Writers { get; set; }
         public DbSet<CornerPost>? Corners { get; set; }
+        public DbSet<Comments>?Comments { get; set; }
     }
 }

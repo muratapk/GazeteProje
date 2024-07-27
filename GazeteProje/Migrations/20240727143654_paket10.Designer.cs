@@ -4,6 +4,7 @@ using GazeteProje.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GazeteProje.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240727143654_paket10")]
+    partial class paket10
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,32 +60,6 @@ namespace GazeteProje.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("GazeteProje.Models.CommentAndNews", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("CommentId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CommentsCommentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("NewsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CommentsCommentId");
-
-                    b.HasIndex("NewsId");
-
-                    b.ToTable("CommentAndNews");
                 });
 
             modelBuilder.Entity("GazeteProje.Models.Comments", b =>
@@ -217,23 +193,6 @@ namespace GazeteProje.Migrations
                     b.ToTable("Writers");
                 });
 
-            modelBuilder.Entity("GazeteProje.Models.CommentAndNews", b =>
-                {
-                    b.HasOne("GazeteProje.Models.Comments", "Comments")
-                        .WithMany("CommentAndNews")
-                        .HasForeignKey("CommentsCommentId");
-
-                    b.HasOne("GazeteProje.Models.News", "News")
-                        .WithMany("CommentAndNews")
-                        .HasForeignKey("NewsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Comments");
-
-                    b.Navigation("News");
-                });
-
             modelBuilder.Entity("GazeteProje.Models.CornerPost", b =>
                 {
                     b.HasOne("GazeteProje.Models.Writer", "Writer")
@@ -259,16 +218,6 @@ namespace GazeteProje.Migrations
             modelBuilder.Entity("GazeteProje.Models.Category", b =>
                 {
                     b.Navigation("News");
-                });
-
-            modelBuilder.Entity("GazeteProje.Models.Comments", b =>
-                {
-                    b.Navigation("CommentAndNews");
-                });
-
-            modelBuilder.Entity("GazeteProje.Models.News", b =>
-                {
-                    b.Navigation("CommentAndNews");
                 });
 
             modelBuilder.Entity("GazeteProje.Models.Writer", b =>
