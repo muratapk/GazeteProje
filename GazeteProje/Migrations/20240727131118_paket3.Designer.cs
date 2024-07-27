@@ -4,6 +4,7 @@ using GazeteProje.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GazeteProje.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240727131118_paket3")]
+    partial class paket3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,41 +62,6 @@ namespace GazeteProje.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("GazeteProje.Models.CornerPost", b =>
-                {
-                    b.Property<int>("CornerPostId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CornerPostId"), 1L, 1);
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("CreatedCorner")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Header")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("UpdatedCorner")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("WriterId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("read")
-                        .HasColumnType("int");
-
-                    b.HasKey("CornerPostId");
-
-                    b.HasIndex("WriterId");
-
-                    b.ToTable("Corners");
-                });
-
             modelBuilder.Entity("GazeteProje.Models.News", b =>
                 {
                     b.Property<int>("NewsId")
@@ -135,49 +102,6 @@ namespace GazeteProje.Migrations
                     b.ToTable("News");
                 });
 
-            modelBuilder.Entity("GazeteProje.Models.Writer", b =>
-                {
-                    b.Property<int>("WriterId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("WriterId"), 1L, 1);
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("PassWord")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WriterImage")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("WriterId");
-
-                    b.ToTable("Writers");
-                });
-
-            modelBuilder.Entity("GazeteProje.Models.CornerPost", b =>
-                {
-                    b.HasOne("GazeteProje.Models.Writer", "Writer")
-                        .WithMany("CornerPosts")
-                        .HasForeignKey("WriterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Writer");
-                });
-
             modelBuilder.Entity("GazeteProje.Models.News", b =>
                 {
                     b.HasOne("GazeteProje.Models.Category", "Category")
@@ -192,11 +116,6 @@ namespace GazeteProje.Migrations
             modelBuilder.Entity("GazeteProje.Models.Category", b =>
                 {
                     b.Navigation("News");
-                });
-
-            modelBuilder.Entity("GazeteProje.Models.Writer", b =>
-                {
-                    b.Navigation("CornerPosts");
                 });
 #pragma warning restore 612, 618
         }
