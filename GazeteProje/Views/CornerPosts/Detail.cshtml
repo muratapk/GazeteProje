@@ -1,4 +1,4 @@
-﻿@model GazeteProje.Models.News
+﻿@model GazeteProje.Models.CornerPost
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
@@ -22,29 +22,24 @@
             <div class="col-lg-8">
                 <div class="sn-container">
                     <div class="sn-img">
-                        <img src="/New_Image/@Model.NewsImage" />
+                        <img src="/Writer_Image/@Model.Writer.WriterImage" />
                     </div>
                     <div class="sn-content">
-                        <h1 class="sn-title">@Model.Header1</h1>
-                        <h3>@Model.Header2</h3>
+                        <h1 class="sn-title">@Model.Writer.Name</h1>
+                        <h3>@Model.Header</h3>
                         <p>
-                          @Model.Content
+                            @Model.Content
                         </p>
-                   
-                       
-                        
-                       
-                       
-                       
-                       
-                       
+
+
+
+
+
+
+
+
                     </div>
                 </div>
-                @await Html.PartialAsync("PartialCommentForm",Model,new ViewDataDictionary(ViewData){{"NewsId",Model.NewsId}})
-                <!--partialasync içinde bir model bu model news haber bilgi olarak new ViewDataDictionary özelliğinde viewdata sana gönderiyorum içinde NewsId olacak şekilde gelecek-->
-               @*  @await Html.PartialAsync("PartialCommentList",Model,new ViewDataDictionary(ViewData){{"NewsId",Model.NewsId}}) *@
-               @await Component.InvokeAsync("CommentList",new {NewsId=Model.NewsId})
-
                 @await Component.InvokeAsync("RelatedNews")
             </div>
 

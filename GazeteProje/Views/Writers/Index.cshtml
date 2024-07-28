@@ -47,7 +47,8 @@
                 @Html.DisplayFor(modelItem => item.PassWord)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.WriterImage)
+                <img src="~/Writer_Image/@item.WriterImage" height="100" width="100"/>
+              
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.WriterId">Edit</a> |

@@ -139,13 +139,55 @@ namespace GazeteProje.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("WriterId,Name,Email,UserName,PassWord,WriterImage")] Writer writer)
+        public async Task<IActionResult> Edit(int id,  Writer writer,IFormFile ImageUpload)
         {
+
             if (id != writer.WriterId)
             {
                 return NotFound();
             }
 
+            try
+            {
+                if (ImageUpload == null)
+                {
+                    TempData["Error"] = "Resim Dosyası Boş";
+                    return View();
+                }
+                else
+                {
+                    var uzanti = Path.GetExtension(ImageUpload.FileName);
+                    var allowExtensions = new[] { ".jpg", ".gif", ".png", ".jpeg" };
+                    //dizi oluşturduk
+                    if (!allowExtensions.Contains(uzanti))
+                    {
+                        TempData["Error"] = "Dosya Tipi Hatalı";
+                        return View();
+                    }
+                    if (ImageUpload.Length > 5242880)
+                    {
+                        TempData["Error"] = "Dosya Boyutu 5Mb Büyük Olamaz";
+                        return View();
+                    }
+
+                    //gonderilen dosyanın uzantısını al pdf png gif vb..
+                    var newName = Guid.NewGuid().ToString() + uzanti;
+                    //dosyaya yeniden isim verdik
+                    string yol = Path.Combine(Directory.GetCurrentDirectory() + "/wwwroot/Writer_Image/", newName);
+                    //dosya kayıt yerini ayarlıyoruz
+                    using (var stream = new FileStream(yol, FileMode.Create))
+                    {
+                        ImageUpload.CopyToAsync(stream);
+                    }
+                    writer.WriterImage = newName;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                TempData["Error"] = "Bir Hata Oluştu";
+                return View();
+            }
             if (ModelState.IsValid)
             {
                 try
@@ -192,11 +234,19 @@ namespace GazeteProje.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+
+
+
             if (_context.Writers == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.Writers'  is null.");
             }
             var writer = await _context.Writers.FindAsync(id);
+            string yol = Path.Combine(Directory.GetCurrentDirectory() + "/wwwroot/New_Image/",writer.WriterImage);
+            if (System.IO.File.Exists(yol))
+            {
+                System.IO.File.Delete(yol);
+            }
             if (writer != null)
             {
                 _context.Writers.Remove(writer);

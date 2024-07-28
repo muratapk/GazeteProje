@@ -1,0 +1,20 @@
+﻿@model GazeteProje.Models.News
+<div class="row">
+  <div class="col-md-6">
+        <form asp-action="CreateComment" asp-controller="CommentList">
+            <div class="mb-3">
+                <input type="hidden" name="NewsId" value="@Model.NewsId"/>
+                <label class="form-label">Yorum Yapanın Adı</label>
+                <input class="form-control" type="text" name="CommentName" placeholder="Yorum Yapanın Adı" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Yorumunuz Yazın</label>
+                <textarea class="form-control" type="text" name="CommentContent" placeholder="Yorum"></textarea>
+            </div>
+            <input type="submit" value="Gönder" class="btn btn-primary"/>
+        </form>
+  </div>
+
+</div>
+
+

@@ -23,6 +23,7 @@ namespace GazeteProje.Controllers
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Corners.Include(c => c.Writer);
+            //include ile writer tablosu ile cornerpost birleştiriyor.
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -48,7 +49,7 @@ namespace GazeteProje.Controllers
         // GET: CornerPosts/Create
         public IActionResult Create()
         {
-            ViewData["WriterId"] = new SelectList(_context.Writers, "WriterId", "WriterId");
+            ViewData["WriterId"] = new SelectList(_context.Writers, "WriterId", "Name");
             return View();
         }
 
@@ -65,7 +66,7 @@ namespace GazeteProje.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["WriterId"] = new SelectList(_context.Writers, "WriterId", "WriterId", cornerPost.WriterId);
+            ViewData["WriterId"] = new SelectList(_context.Writers, "WriterId", "Name", cornerPost.WriterId);
             return View(cornerPost);
         }
 
@@ -82,7 +83,7 @@ namespace GazeteProje.Controllers
             {
                 return NotFound();
             }
-            ViewData["WriterId"] = new SelectList(_context.Writers, "WriterId", "WriterId", cornerPost.WriterId);
+            ViewData["WriterId"] = new SelectList(_context.Writers, "WriterId", "Name", cornerPost.WriterId);
             return View(cornerPost);
         }
 
@@ -159,7 +160,11 @@ namespace GazeteProje.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
+        public IActionResult Detail(int id)
+        {
+            var result = _context.Corners.Include("Writer").Where(p=>p.CornerPostId==id).FirstOrDefault();
+            return View(result);
+        }
         private bool CornerPostExists(int id)
         {
           return (_context.Corners?.Any(e => e.CornerPostId == id)).GetValueOrDefault();
