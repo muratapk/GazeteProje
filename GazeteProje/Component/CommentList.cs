@@ -1,4 +1,5 @@
 ﻿using GazeteProje.Data;
+using GazeteProje.Dto;
 using GazeteProje.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -25,10 +26,10 @@ namespace GazeteProje.Component
 
             //return View(yorumlar);
             //inner join ile birleştirme
-            var query = (from c in _context.Comments
+            var  query = (from c in _context.Comments
                          join cn in _context.CommentAndNews on c.CommentId equals cn.CommentId
                          where cn.NewsId == NewsId
-                         select new
+                         select new CommentDto
                          {
                              CommentName = c.CommentName,
                              CommentContent = c.CommentContent,
