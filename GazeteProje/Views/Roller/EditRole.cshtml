@@ -1,0 +1,18 @@
+﻿@model GazeteProje.Models.AppRole
+@{
+    ViewData["Title"] = "EditRole";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>EditRole</h1>
+
+<h1>CreateRole</h1>
+<form asp-action="EditRole" asp-controller="Roller">
+    <input type="hidden" name="Id" asp-for="Id" value="@Model.Id" />
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Rol Giriniz</label>
+        <input type="text" class="form-control" name="Name" id="exampleFormControlInput1"  asp-for="Name" value="@Model.Name" placeholder="Rol Giriniz">
+    </div>
+    <input class="btn btn-success" type="submit" value="Kayıt" />
+</form>
+

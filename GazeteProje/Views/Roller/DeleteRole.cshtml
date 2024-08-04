@@ -1,0 +1,16 @@
+﻿@model GazeteProje.Models.AppRole
+@{
+    ViewData["Title"] = "DeleteRole";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>DeleteRole</h1>
+
+<form asp-action="DeleteRole" asp-controller="Roller">
+    <input type="hidden" name="Id" asp-for="Id" value="@Model.Id" />
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Rol Giriniz</label>
+        <input type="text" class="form-control" name="Name" id="exampleFormControlInput1" readonly asp-for="Name" value="@Model.Name" placeholder="Rol Giriniz">
+    </div>
+    <input class="btn btn-success" type="submit" value="Kayıt Sil" />
+</form>

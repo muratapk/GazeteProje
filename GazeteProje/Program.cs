@@ -14,6 +14,13 @@ builder.Services.AddSession(options =>
     options.IdleTimeout = TimeSpan.FromSeconds(30);
     options.Cookie.IsEssential = true;
 });
+
+builder.Services.ConfigureApplicationCookie(options => {
+options.AccessDeniedPath= "/Page/404";
+options.LogoutPath= "/Home/Index";
+options.LoginPath = "/Home/Index";
+
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

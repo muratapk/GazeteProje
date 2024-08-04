@@ -1,0 +1,15 @@
+﻿@model GazeteProje.Models.CreateRoleViewModel
+@{
+    ViewData["Title"] = "CreateRole";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>CreateRole</h1>
+<form asp-action="CreateRole" asp-controller="Roller">
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Rol Giriniz</label>
+        <input type="text" class="form-control" name="RoleName"  id="exampleFormControlInput1" placeholder="Rol Giriniz">
+    </div>
+   <input class="btn btn-success" type="submit" value="Kayıt"/>
+</form>
+

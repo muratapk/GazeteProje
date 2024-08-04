@@ -1,0 +1,20 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+
+<div class="tb-menu">
+    <!--sisteme giriş yapıp yapmadığını kontrol ediyor-->
+    @if (SignInManager.IsSignedIn(User))
+    {
+    //kişi sisteme dahil olduysa kişinin kimlik bilgisi olarak adını göster
+        <a class="btn btn-success" asp-action="Index" asp-controller="Login">@User.Identity.Name</a>
+        <a class="btn btn-success" asp-action="Logout" asp-controller="Login">Güvenli Çıkış</a>
+    }
+    else
+    {
+        <a class="btn btn-success" asp-action="Index" asp-controller="Login">Giriş</a>
+        <a class="btn btn-success" asp-action="Index" asp-controller="Register">Kayıt</a>
+    }
+</div>
+

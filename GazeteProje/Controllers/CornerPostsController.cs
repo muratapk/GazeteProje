@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GazeteProje.Data;
 using GazeteProje.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GazeteProje.Controllers
 {
@@ -18,7 +19,7 @@ namespace GazeteProje.Controllers
         {
             _context = context;
         }
-
+        [Authorize]
         // GET: CornerPosts
         public async Task<IActionResult> Index()
         {
@@ -26,7 +27,7 @@ namespace GazeteProje.Controllers
             //include ile writer tablosu ile cornerpost birleştiriyor.
             return View(await applicationDbContext.ToListAsync());
         }
-
+        [Authorize]
         // GET: CornerPosts/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -45,7 +46,7 @@ namespace GazeteProje.Controllers
 
             return View(cornerPost);
         }
-
+        [Authorize]
         // GET: CornerPosts/Create
         public IActionResult Create()
         {
@@ -56,6 +57,8 @@ namespace GazeteProje.Controllers
         // POST: CornerPosts/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CornerPostId,Header,Content,CreatedCorner,UpdatedCorner,WriterId,read")] CornerPost cornerPost)

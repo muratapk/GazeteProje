@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GazeteProje.Data;
 using GazeteProje.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GazeteProje.Controllers
 {
@@ -19,6 +20,8 @@ namespace GazeteProje.Controllers
             _context = context;
         }
 
+        [Authorize]
+        
         // GET: Writers
         public async Task<IActionResult> Index()
         {
