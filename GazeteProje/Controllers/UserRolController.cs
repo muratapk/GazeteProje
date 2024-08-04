@@ -1,6 +1,8 @@
 ﻿using GazeteProje.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace GazeteProje.Controllers
 {
@@ -15,8 +17,15 @@ namespace GazeteProje.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+               
+            return View();
+        }
+        public async Task<IActionResult>Create()
+        {
+            ViewBag.User = new SelectList(_userManager.Users, "Id", "UserName");
+            ViewBag.Role = new SelectList(_roleManager.Roles, "Id", "Name");
             return View();
         }
     }
